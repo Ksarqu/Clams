@@ -35,7 +35,7 @@ async def kostka(ctx):
     roll = randint(1, 6)
     str(roll)
     await message.delete()
-    await ctx.send(f"Liczba na kostce to {roll}")
+    await ctx.send(f"Liczba na kostce to {roll} :game_die:")
 
 @bot.command()
 async def wonz(ctx):
@@ -48,7 +48,7 @@ async def wonz(ctx):
 names = {0: "Poniedziałek", 1: "Wtorek", 2: "Środa", 3: "Czwartek", 4: "Piątek", 5: "Sobota", 6: "Niedziela"}
 @bot.command()
 async def dzien(ctx):
-    await ctx.send(f"dzisiaj jest {names[datetime.date.today().weekday()]}")
+    await ctx.send(f"dzisiaj jest {names[datetime.date.today().weekday()]} :calendar_spiral:")
 
 @bot.command()
 async def omnie(ctx):
@@ -75,7 +75,7 @@ async def howgay(ctx):
 async def avatar(ctx):
     avatar = ctx.author.avatar_url
     await ctx.send(avatar)
-    await ctx.send("Oto twój awatar :thumb_up:")
+    await ctx.send("Oto twój awatar :thumbsup:")
 
 @bot.command()
 async def iqtest(ctx):
