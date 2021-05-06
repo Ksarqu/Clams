@@ -82,7 +82,7 @@ async def iqtest(ctx):
     iq = randint(10, 300)
     message = await ctx.send("Analizuje Twoje wiadomości...")    
     await asyncio.sleep(6)
-    await message.delete()
+    message.delete()
     await ctx.send(f"Twoje IQ wynosi {iq}pkt. :brain:")
 
 
