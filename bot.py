@@ -1,26 +1,23 @@
 import discord
 from discord.ext import commands
 import json
-from random import randint
+import random
 import datetime
-import asyncio
 import math
-import os
-import youtube_dl
-from ffmpeg import *
 
-client = commands.Bot(command_prefix = "*") 
-client.remove_command('help')
+bot = commands.Bot(command_prefix = "*") 
+bot.remove_command('help')
+
 
 with open("./config.json") as configjsonFile:
     configData = json.load(configjsonFile)
     TOKEN = configData["TOKEN"]
 
-@client.event
+@bot.event
 async def on_ready():
     print('Zalogowany')
 
-@client.command()
+@bot.command()
 async def help(ctx):
     embed=discord.Embed(title="*help", description="", color=0x0ba800)
     embed.add_field(name="Pod spodem masz linka do komend!", value="https://clamsbot.cf/commands.html", inline=True)
@@ -29,7 +26,7 @@ async def help(ctx):
 
 
 #kostka
-@client.command()
+@bot.command()
 async def kostka(ctx):
     message = await ctx.send("Rzucam... :game_die:")
     await asyncio.sleep(1)
@@ -38,40 +35,20 @@ async def kostka(ctx):
     await message.delete()
     await ctx.send(f"Liczba na kostce to {roll}")
 
-@client.command()
+@bot.command()
 async def wonz(ctx):
-    await ctx.send("wonsz rzeczny")
+    await ctx.send("wąż rzeczny")
     asyncio.sleep(1)
     await ctx.send("tututu")
     asyncio.sleep(1)
     await ctx.send("jest niebezpieczny")
 
-@client.command()
+names = {0: "Poniedziałek", 1: "Wtorek", 2: "Środa", 3: "Czwartek", 4: "Piątek", 5: "Sobota", 6: "Niedziela"}
+@bot.command()
 async def dzien(ctx):
-    dayNumber = datetime.datetime.today().weekday()
-    if dayNumber == 0:
-        weekday = 'Poniedzialek'
-        await ctx.send(weekday+' ')
-    elif dayNumber == 1:
-        weekday = 'Wtorek'
-        await ctx.send(weekday)
-    elif dayNumber == 2:
-        weekday = 'Sroda'
-        await ctx.send(weekday)
-    elif dayNumber == 3:
-        weekday = 'Czwartek'
-        await ctx.send(weekday)
-    elif dayNumber == 4:
-        weekday = 'Piatek'
-        await ctx.send(weekday)
-    elif dayNumber == 5:
-        weekday = 'Sobota'
-        await ctx.send(weekday)
-    elif dayNumber == 6:
-        weekday = 'Niedziela'
-        await ctx.send(weekday)
+    await ctx.send(names[datetime.date.today().weekday()])
 
-@client.command()
+@bot.command()
 async def omnie(ctx):
     embed=discord.Embed(title="*omnie", description="Witam, Nazywam sie Clams", color=0x0ba800)
     embed.add_field(name=" jestem botem zaprogramowanym przez czaro#3107, służę do komend 4fun i zabawy!", value="Jeśli potrzebujesz pomocy związanej z botem, napisz do właściciela!", inline=True)
@@ -79,76 +56,13 @@ async def omnie(ctx):
     await print(str (ctx.author)+ "uzyl komendy *omnie")
     
 
-@client.command()
+@bot.command()
 async def ping(ctx):
     pong = await ctx.send("Pong! 🏓")
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(0.2)
     await pong.delete()
-    ClamsPing = client.latency * 1000
+    ClamsPing = bot.latency * 1000
     await ctx.send(f'***Mój ping to: {math.floor(ClamsPing*100)/100}ms!*** :smile:')
-    
-@client.command()
-async def play(ctx, url : str):
-    song_there = os.path.isfile("song.mp3")
-    try:
-        if song_there:
-            os.remove("song.mp3")
-    except PermissionError:
-        await ctx.send("Wait for the current playing music to end or use the 'stop' command")
-        return
-
-    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='muzyka')
-    await voiceChannel.connect()
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-
-    ydl_opts = {
-        'format': 'bestaudio',
-        'default_search': 'auto',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-    }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
-    for file in os.listdir("./"):
-        if file.endswith(".mp3"):
-            os.rename(file, "song.mp3")
-    voice.play(discord.FFmpegPCMAudio("song.mp3"))
-
-
-@client.command()
-async def leave(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if voice.is_connected():
-        await voice.disconnect()
-    else:
-        await ctx.send("The bot is not connected to a voice channel.")
-
-
-@client.command()
-async def pause(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if voice.is_playing():
-        voice.pause()
-    else:
-        await ctx.send("Currently no audio is playing.")
-
-
-@client.command()
-async def resume(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if voice.is_paused():
-        voice.resume()
-    else:
-        await ctx.send("The audio is not paused.")
-
-
-@client.command()
-async def stop(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    voice.stop()
-
  
-client.run(TOKEN)
+
+bot.run(TOKEN)
