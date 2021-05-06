@@ -6,6 +6,7 @@ import datetime
 import math
 import asyncio
 import traceback
+import requests
 
 bot = commands.Bot(command_prefix = "*") 
 bot.remove_command('help')
@@ -85,5 +86,12 @@ async def iqtest(ctx):
     await message.delete()
     await ctx.send(f"Twoje IQ wynosi {iq}pkt. :brain:")
 
+@bot.command()
+async def kotek(ctx):
+    response = requests.get('https://aws.random.cat/meow') 
+    data = response.json()
+    await ctx.send("***Oto twój kotek :heart_eyes_cat:***")
+    await ctx.send(data['file'])
+    
 
 bot.run(TOKEN)
