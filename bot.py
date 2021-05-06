@@ -1,9 +1,11 @@
 import discord
 from discord.ext import commands
 import json
-import random
+from random import randint
 import datetime
 import math
+import asyncio
+import traceback
 
 bot = commands.Bot(command_prefix = "*") 
 bot.remove_command('help')
@@ -46,7 +48,7 @@ async def wonz(ctx):
 names = {0: "Poniedziałek", 1: "Wtorek", 2: "Środa", 3: "Czwartek", 4: "Piątek", 5: "Sobota", 6: "Niedziela"}
 @bot.command()
 async def dzien(ctx):
-    await ctx.send(names[datetime.date.today().weekday()])
+    await ctx.send(f"dzisiaj jest {names[datetime.date.today().weekday()]}")
 
 @bot.command()
 async def omnie(ctx):
@@ -62,7 +64,26 @@ async def ping(ctx):
     await asyncio.sleep(0.2)
     await pong.delete()
     ClamsPing = bot.latency * 1000
-    await ctx.send(f'***Mój ping to: {math.floor(ClamsPing*100)/100}ms!*** :smile:')
- 
+    await ctx.send(f'***Mój ping to: {int(ClamsPing)}ms!*** :smile:')
+
+@bot.command()
+async def howgay(ctx):
+    howgay = randint(0, 100)
+    await ctx.send(f"Jesteś gejem w {howgay}% :rainbow_flag:")
+
+@bot.command()
+async def avatar(ctx):
+    avatar = ctx.author.avatar_url
+    await ctx.send(avatar)
+    await ctx.send("Oto twój awatar :thumb_up:")
+
+@bot.command()
+async def iqtest(ctx):
+    iq = randint(10, 300)
+    message = await ctx.send("Analizuje Twoje wiadomości...")    
+    asyncio.sleep(6)
+    await message.delete()
+    await ctx.send(f"Twoje IQ wynosi {iq}pkt. :brain:")
+
 
 bot.run(TOKEN)
