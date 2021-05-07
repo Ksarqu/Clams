@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import json
 from random import randint
-import datetime
+from datetime import datetime
 import math
 import asyncio
 import traceback
@@ -38,6 +38,7 @@ async def kostka(ctx):
     await message.delete()
     await ctx.send(f"Liczba na kostce to {roll} :game_die:")
 
+#wonz
 @bot.command()
 async def wonz(ctx):
     await ctx.send("wąż rzeczny")
@@ -46,10 +47,16 @@ async def wonz(ctx):
     asyncio.sleep(1)
     await ctx.send("jest niebezpieczny")
 
+#dzien
 names = {0: "Poniedziałek", 1: "Wtorek", 2: "Środa", 3: "Czwartek", 4: "Piątek", 5: "Sobota", 6: "Niedziela"}
 @bot.command()
 async def dzien(ctx):
     await ctx.send(f"dzisiaj jest {names[datetime.date.today().weekday()]} :calendar_spiral:")
+
+@bot.command()
+async def ktoragodzina(ctx):
+    godzina = datetime.now().strftime("%H:%M")
+    await ctx.send(f"Teraz jest {godzina}  :alarm_clock:")
 
 @bot.command()
 async def omnie(ctx):
@@ -62,7 +69,7 @@ async def omnie(ctx):
 @bot.command()
 async def ping(ctx):
     pong = await ctx.send("Pong! 🏓")
-    await asyncio.sleep(0.2)
+    await asyncio.sleep(0.5)
     await pong.delete()
     ClamsPing = bot.latency * 1000
     await ctx.send(f'***Mój ping to: {int(ClamsPing)}ms!*** :smile:')
