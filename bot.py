@@ -40,9 +40,9 @@ async def kostka(ctx):
 @bot.command()
 async def wonz(ctx):
     await ctx.send("wąż rzeczny")
-    asyncio.sleep(1)
+    await asyncio.sleep(1)
     await ctx.send("tututu")
-    asyncio.sleep(1)
+    await asyncio.sleep(1)
     await ctx.send("jest niebezpieczny")
 
 names = {0: "Poniedziałek", 1: "Wtorek", 2: "Środa", 3: "Czwartek", 4: "Piątek", 5: "Sobota", 6: "Niedziela"}
@@ -84,6 +84,17 @@ async def iqtest(ctx):
     await asyncio.sleep(6)
     await message.delete()
     await ctx.send(f"Twoje IQ wynosi {iq}pkt. :brain:")
+
+
+@bot.command()
+async def epicgamerrate(ctx):
+    rate = randint(0,100)
+    if rate > 70:
+        await ctx.send(f"Jesteś w {rate}% epic gamer, Pogchamp :video_game:")
+        return 0
+    if rate < 70:
+        await ctx.send(f"Jesteś w {rate}% epic gamerem, troche słabo :disappointed:")
+        return 0
 
 
 bot.run(TOKEN)
