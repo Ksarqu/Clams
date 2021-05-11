@@ -3,7 +3,7 @@
 Discord Bot
 
 Requirements:
-    Python (version above 3.6)\n
+    Python (version above 3.6)
     discord.py
     requests
 
