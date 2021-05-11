@@ -111,5 +111,9 @@ async def epicgamerrate(ctx):
         await ctx.send(f"Jesteś w {rate}% epic gamerem, troche słabo :disappointed:")
         return 0
 
+@bot.command()
+async def lenny(ctx):
+    await ctx.send("( ͡° ͜ʖ ͡°)")
+
 
 bot.run(TOKEN)
