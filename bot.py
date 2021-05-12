@@ -106,10 +106,9 @@ async def epicgamerrate(ctx):
     rate = randint(0,100)
     if rate > 70:
         await ctx.send(f"Jesteś w {rate}% epic gamer, Pogchamp :video_game:")
-        return 0
-    if rate < 70:
+    elif rate < 70:
         await ctx.send(f"Jesteś w {rate}% epic gamerem, troche słabo :disappointed:")
-        return 0
+
 
 @bot.command()
 async def lenny(ctx):
