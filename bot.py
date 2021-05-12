@@ -12,7 +12,7 @@ bot = commands.Bot(command_prefix = "*")
 bot.remove_command('help')
 
 
-with open("./config.json") as configjsonFile:
+with open("config.json") as configjsonFile:
     configData = json.load(configjsonFile)
     TOKEN = configData["TOKEN"]
 
@@ -31,10 +31,9 @@ async def help(ctx):
 #kostka
 @bot.command()
 async def kostka(ctx):
+    roll = randint(1, 6)
     message = await ctx.send("Rzucam... :game_die:")
     await asyncio.sleep(1)
-    roll = randint(1, 6)
-    str(roll)
     await message.delete()
     await ctx.send(f"Liczba na kostce to {roll} :game_die:")
 
