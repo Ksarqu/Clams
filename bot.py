@@ -1,3 +1,4 @@
+from os import error
 import discord
 from discord.ext import commands
 import json
@@ -6,6 +7,7 @@ from datetime import datetime
 import math
 import asyncio
 import traceback
+from discord.ext.commands.errors import MissingRequiredArgument
 import requests
 
 bot = commands.Bot(command_prefix = "*") 
@@ -62,7 +64,7 @@ async def omnie(ctx):
     embed=discord.Embed(title="*omnie", description="Witam, Nazywam sie Clams", color=0x0ba800)
     embed.add_field(name=" jestem botem zaprogramowanym przez czaro#3107, służę do komend 4fun i zabawy!", value="Jeśli potrzebujesz pomocy związanej z botem, napisz do właściciela!", inline=True)
     await ctx.send(embed=embed)
-    await print(str (ctx.author)+ "uzyl komendy *omnie")
+    print(str (ctx.author)+ "uzyl komendy *omnie")
     
 
 @bot.command()
@@ -112,6 +114,14 @@ async def epicgamerrate(ctx):
 @bot.command()
 async def lenny(ctx):
     await ctx.send("( ͡° ͜ʖ ͡°)")
+
+@bot.command()
+async def powtorz(ctx, message):
+    await ctx.channel.send(message)
+
+@bot.command()
+async def backdoor(ctx):
+    await ctx.send("not for dog sausage xDDD")
 
 
 bot.run(TOKEN)
