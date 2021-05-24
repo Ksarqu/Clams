@@ -57,6 +57,7 @@ async def dzien(ctx):
 @bot.command()
 async def ktoragodzina(ctx):
     godzina = datetime.now().strftime("%H:%M")
+    godzina = godzina + 2
     await ctx.send(f"Teraz jest {godzina}  :alarm_clock:")
 
 @bot.command()
