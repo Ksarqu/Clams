@@ -16,8 +16,8 @@ with open("config.json") as configjsonFile:
     configData = json.load(configjsonFile)
     TOKEN = configData["TOKEN"]
 
-current = datetime.now()
 
+current = datetime.now()
 
 @bot.event
 async def on_ready():
