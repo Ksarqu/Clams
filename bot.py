@@ -9,6 +9,7 @@ import asyncio
 import traceback
 from discord.ext.commands.errors import MissingRequiredArgument
 import requests
+import locale
 
 bot = commands.Bot(command_prefix = "*") 
 bot.remove_command('help')
@@ -56,8 +57,8 @@ async def dzien(ctx):
 
 @bot.command()
 async def ktoragodzina(ctx):
+    locale.setlocale(locale.LC_ALL, 'pl_PL.utf8')
     godzina = datetime.now().strftime("%H:%M")
-    godzina = godzina + 2
     await ctx.send(f"Teraz jest {godzina}  :alarm_clock:")
 
 @bot.command()
