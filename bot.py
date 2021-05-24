@@ -5,8 +5,10 @@ import json
 import random
 from datetime import datetime
 import math
-import asyncio
+from random import randint
 import requests
+import asyncio
+from discord import DMChannel
 
 bot = commands.Bot(command_prefix = "*") 
 bot.remove_command('help')
@@ -39,7 +41,7 @@ async def kostka(ctx):
     message = await ctx.send("Rzucam... :game_die:")
     await asyncio.sleep(1)
     await message.delete()
-    await ctx.send(f"Liczba na kostce to {roll} :game_die:")
+    await ctx.sed(f"Liczba na kostce to {roll} :game_die:")
 
 #wonz
 @bot.command()
@@ -139,7 +141,9 @@ async def piesek(ctx):
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send("Błąd!")
-    errorcontent = str(error)
-    await ctx.send(f"Treść błędu :wrench: \n```{errorcontent}```")
+    str(error)
+    await ctx.send(f"Treść błędu :wrench: \n```{error}```")
+    user = await bot.fetch_user("761868897241661490")
+    await DMChannel.send(user, f"Clams napotkał error!```{error}```")
 
 bot.run(TOKEN)
