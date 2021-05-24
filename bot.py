@@ -125,5 +125,11 @@ async def powtorz(ctx, message):
 async def backdoor(ctx):
     await ctx.send("not for dog sausage xDDD")
 
+@bot.event
+async def on_command_error(ctx, error):
+    await ctx.send("Błąd!")
+    errorcontent = str(error)
+    await ctx.send(f"Treść błędu :wrench: \n```{errorcontent}```")
+
 
 bot.run(TOKEN)
