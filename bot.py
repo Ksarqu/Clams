@@ -1,14 +1,11 @@
-from os import error
 import discord
-from discord.ext import commands
 import json
-import random
-from datetime import datetime
-import math
-from random import randint
 import requests
-import asyncio
-from discord import DMChannel
+from asyncio import sleep
+from os import error
+from discord.ext import commands
+from datetime import datetime
+from random import randint
 from google_trans_new import google_translator
 
 bot = commands.Bot(command_prefix = "*") 
@@ -39,7 +36,7 @@ async def help(ctx):
 async def kostka(ctx):
     roll = randint(1, 6)
     message = await ctx.send("Rzucam... :game_die:")
-    await asyncio.sleep(1)
+    await sleep(1)
     await message.delete()
     await ctx.sed(f"Liczba na kostce to {roll} :game_die:")
 
@@ -47,9 +44,9 @@ async def kostka(ctx):
 @bot.command()
 async def wonz(ctx):
     await ctx.send("wąż rzeczny")
-    await asyncio.sleep(1)
+    await sleep(1)
     await ctx.send("tututu")
-    await asyncio.sleep(1)
+    await sleep(1)
     await ctx.send("jest niebezpieczny")
 
 #dzien
@@ -74,7 +71,7 @@ async def omnie(ctx):
 @bot.command()
 async def ping(ctx):
     pong = await ctx.send("Pong! 🏓")
-    await asyncio.sleep(0.5)
+    await sleep(0.5)
     await pong.delete()
     ClamsPing = bot.latency * 1000
     await ctx.send(f'***Mój ping to: {int(ClamsPing)}ms!*** :smile:')
@@ -94,7 +91,7 @@ async def avatar(ctx):
 async def iqtest(ctx):
     iq = randint(10, 300)
     message = await ctx.send("Analizuje Twoje wiadomości...")    
-    await asyncio.sleep(6)
+    await sleep(6)
     await message.delete()
     await ctx.send(f"Twoje IQ wynosi {iq}pkt. :brain:")
 
@@ -120,7 +117,7 @@ async def lenny(ctx):
     await ctx.send("( ͡° ͜ʖ ͡°)")
 
 @bot.command()
-async def powtorz(ctx, message):
+async def powtorz(ctx, *, message):
     await ctx.channel.send(message)
 
 @bot.command()
@@ -150,9 +147,8 @@ async def cytat(ctx):
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send("Błąd!")
-    str(error)
     await ctx.send(f"Treść błędu :wrench: \n```{error}```")
     user = await bot.fetch_user("761868897241661490")
-    await DMChannel.send(user, f"Clams napotkał error!```{error}```")
+    await user.send(f"Clams napotkał error!\n```{error}```")
 
 bot.run(TOKEN)
