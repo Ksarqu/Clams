@@ -9,10 +9,10 @@ from random import randint
 import requests
 import asyncio
 from discord import DMChannel
+from google_trans_new import google_translator
 
 bot = commands.Bot(command_prefix = "*") 
 bot.remove_command('help')
-
 
 with open("config.json") as configjsonFile:
     configData = json.load(configjsonFile)
@@ -137,6 +137,15 @@ async def piesek(ctx):
     data = response.json()
     await ctx.send("***Oto twój piesek :heart_eyes_cat:***")
     await ctx.send(data['message'])
+
+@bot.command()
+async def cytat(ctx):
+    site = ("https://www.affirmations.dev/")
+    translator = google_translator()
+    get_value = requests.get(site).json()
+    text_value = get_value['affirmation']
+    translate_text = translator.translate(text_value, lang_tgt='pl')
+    await ctx.send(translate_text[:(len(translate_text) - 1)] + ".")
     
 @bot.event
 async def on_command_error(ctx, error):
