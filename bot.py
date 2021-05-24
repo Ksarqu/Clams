@@ -129,6 +129,13 @@ async def backdoor(ctx):
 async def uptime(ctx):
     await ctx.send(f"{datetime.now() - current}")
 
+@bot.command()
+async def piesek(ctx):
+    response = requests.get('https://dog.ceo/api/breeds/image/random') 
+    data = response.json()
+    await ctx.send("***Oto twój piesek :heart_eyes_cat:***")
+    await ctx.send(data['message'])
+    
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send("Błąd!")
