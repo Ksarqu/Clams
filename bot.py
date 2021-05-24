@@ -2,14 +2,11 @@ from os import error
 import discord
 from discord.ext import commands
 import json
-from random import randint
+import random
 from datetime import datetime
 import math
 import asyncio
-import traceback
-from discord.ext.commands.errors import MissingRequiredArgument
 import requests
-import locale
 
 bot = commands.Bot(command_prefix = "*") 
 bot.remove_command('help')
@@ -19,8 +16,12 @@ with open("config.json") as configjsonFile:
     configData = json.load(configjsonFile)
     TOKEN = configData["TOKEN"]
 
+current = datetime.now()
+
+
 @bot.event
 async def on_ready():
+    print(current)
     print('Zalogowany')
 
 @bot.command()
@@ -57,7 +58,6 @@ async def dzien(ctx):
 
 @bot.command()
 async def ktoragodzina(ctx):
-    locale.setlocale(locale.LC_ALL, 'pl_PL.utf8')
     godzina = datetime.now().strftime("%H:%M")
     await ctx.send(f"Teraz jest {godzina}  :alarm_clock:")
 
@@ -125,11 +125,14 @@ async def powtorz(ctx, message):
 async def backdoor(ctx):
     await ctx.send("not for dog sausage xDDD")
 
+@bot.command()
+async def uptime(ctx):
+    await ctx.send(f"{datetime.now() - current}")
+
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send("Błąd!")
     errorcontent = str(error)
     await ctx.send(f"Treść błędu :wrench: \n```{errorcontent}```")
-
 
 bot.run(TOKEN)
