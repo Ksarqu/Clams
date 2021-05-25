@@ -5,22 +5,19 @@ from asyncio import sleep
 from os import error
 from discord.ext import commands
 from datetime import datetime
-from random import randint
+from random import randint, choice, random
 from google_trans_new import google_translator
 
 bot = commands.Bot(command_prefix = "*") 
 bot.remove_command('help')
 
+
 with open("config.json") as configjsonFile:
     configData = json.load(configjsonFile)
     TOKEN = configData["TOKEN"]
 
-
-current = datetime.now()
-
 @bot.event
 async def on_ready():
-    print(current)
     print('Zalogowany')
 
 @bot.command()
@@ -125,10 +122,6 @@ async def backdoor(ctx):
     await ctx.send("not for dog sausage xDDD")
 
 @bot.command()
-async def uptime(ctx):
-    await ctx.send(f"{datetime.now() - current}")
-
-@bot.command()
 async def piesek(ctx):
     response = requests.get('https://dog.ceo/api/breeds/image/random') 
     data = response.json()
@@ -142,8 +135,27 @@ async def cytat(ctx):
     get_value = requests.get(site).json()
     text_value = get_value['affirmation']
     translate_text = translator.translate(text_value, lang_tgt='pl')
-    await ctx.send(translate_text[:(len(translate_text) - 1)] + ".")
-    
+    await ctx.send(f"{translate_text[:-1]}.")
+
+@bot.command(aliases=["trans", "translate"])
+async def translator(ctx, message, language='en'):
+    translator = google_translator()
+    translate = translator.translate(message, lang_tgt=language)
+    await ctx.send(translate)
+
+@bot.command(aliases=["kula", "magiczna"])
+async def magicznakula(ctx, *, message):
+    m = await ctx.send("Pocieram magiczną kulę... :magic_wand:")
+    await sleep(2)
+    answer = choice([
+    "powinieneś to zrobić",
+    "musisz to zrobić",
+    "nie rób tego",
+    "wypadało by to zrobić",
+    "nie polecam tego robić"])
+    await m.edit(content=f"Magiczna kula mówi: {answer} :crystal_ball: ")
+
+
 @bot.event
 async def on_command_error(ctx, error):
     await ctx.send("Błąd!")
