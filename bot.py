@@ -41,7 +41,7 @@ async def kostka(ctx):
 # wonz
 @bot.command()
 async def wonz(ctx):
-    await ctx.send("w膮偶 rzeczny")
+    await ctx.send("wonsz rzeczny")
     await sleep(1)
     await ctx.send("tututu")
     await sleep(1)
@@ -49,7 +49,7 @@ async def wonz(ctx):
 
 
 # dzien
-names = {0: "Poniedzia艂ek", 1: "Wtorek", 2: "艢roda", 3: "Czwartek", 4: "Pi膮tek", 5: "Sobota", 6: "Niedziela"}
+names = {0: "Poniedziałek", 1: "Wtorek", 2: "艢roda", 3: "Czwartek", 4: "Piątek", 5: "Sobota", 6: "Niedziela"}
 
 
 @bot.command()
@@ -66,38 +66,38 @@ async def ktoragodzina(ctx):
 @bot.command()
 async def omnie(ctx):
     embed = discord.Embed(title="*omnie", description="Witam, Nazywam sie Clams", color=0x0ba800)
-    embed.add_field(name=" jestem botem zaprogramowanym przez czaro#3107, s艂u偶臋 do komend 4fun i zabawy!",
-                    value="Je艣li potrzebujesz pomocy zwi膮zanej z botem, napisz do w艂a艣ciciela!", inline=True)
+    embed.add_field(name=" jestem botem zaprogramowanym przez czaro#3107, służę do komend 4fun i zabawy!",
+                    value="Jeśli potrzebujesz pomocy związanej z botem, napisz do właściciela!", inline=True)
     await ctx.send(embed=embed)
     print(str(ctx.author) + "uzyl komendy *omnie")
 
 
 @bot.command()
 async def ping(ctx):
-    pong = await ctx.send("Pong! 馃彄")
+    pong = await ctx.send("Pong! :ping_pong: ")
     await sleep(0.5)
     await pong.delete()
     clams_ping = bot.latency * 1000
-    await ctx.send(f'***M贸j ping to: {int(clams_ping)}ms!*** :smile:')
+    await ctx.send(f'***Mój ping to: {int(clams_ping)}ms!*** :smile:')
 
 
 @bot.command()
 async def howgay(ctx):
     how_gay = randint(0, 100)
-    await ctx.send(f"Jeste艣 gejem w {how_gay}% :rainbow_flag:")
+    await ctx.send(f"Jesteś gejem w {how_gay}% :rainbow_flag:")
 
 
 @bot.command()
 async def avatar(ctx):
     picture = ctx.author.avatar_url
     await ctx.send(picture)
-    await ctx.send("Oto tw贸j awatar :thumbsup:")
+    await ctx.send("Oto twój awatar :thumbsup:")
 
 
 @bot.command()
 async def iqtest(ctx):
     iq = randint(10, 300)
-    message = await ctx.send("Analizuje Twoje wiadomo艣ci...")
+    message = await ctx.send("Analizuje Twoje wiadomości...")
     await sleep(6)
     await message.delete()
     await ctx.send(f"Twoje IQ wynosi {iq}pkt. :brain:")
@@ -107,7 +107,7 @@ async def iqtest(ctx):
 async def kotek(ctx):
     response = requests.get('https://aws.random.cat/meow')
     data = response.json()
-    await ctx.send("***Oto tw贸j kotek :heart_eyes_cat:***")
+    await ctx.send("***Oto twój kotek :heart_eyes_cat:***")
     await ctx.send(data['file'])
 
 
@@ -115,14 +115,14 @@ async def kotek(ctx):
 async def epicgamerrate(ctx):
     rate = randint(0, 100)
     if rate >= 70:
-        await ctx.send(f"Jeste艣 w {rate}% epic gamer, Pogchamp :video_game:")
+        await ctx.send(f"Jesteś w {rate}% epic gamer, Pogchamp :video_game:")
     else:
-        await ctx.send(f"Jeste艣 w {rate}% epic gamerem, troche s艂abo :disappointed:")
+        await ctx.send(f"Jestś w {rate}% epic gamerem, troche słabo :disappointed:")
 
 
 @bot.command()
 async def lenny(ctx):
-    await ctx.send("( 汀掳 蜏蕱 汀掳)")
+    await ctx.send("( ͡° ͜ʖ ͡°)")
 
 
 @bot.command()
@@ -139,7 +139,7 @@ async def backdoor(ctx):
 async def piesek(ctx):
     response = requests.get('https://dog.ceo/api/breeds/image/random')
     data = response.json()
-    await ctx.send("***Oto tw贸j piesek :heart_eyes_cat:***")
+    await ctx.send("***Oto twój piesek :heart_eyes_cat:***")
     await ctx.send(data['message'])
 
 
@@ -162,15 +162,15 @@ async def translator(ctx, message, language='en'):
 
 @bot.command(aliases=["kula", "magiczna"])
 async def magicznakula(ctx):
-    m = await ctx.send("Pocieram magiczn膮 kul臋... :magic_wand:")
+    m = await ctx.send("Pocieram magiczną kulą... :magic_wand:")
     await sleep(2)
     answer = choice([
-        "powiniene艣 to zrobi膰",
-        "musisz to zrobi膰",
-        "nie r贸b tego",
-        "wypada艂o by to zrobi膰",
-        "nie polecam tego robi膰"])
-    await m.edit(content=f"Magiczna kula m贸wi: {answer} :crystal_ball: ")
+        "powinieneś to zrobić",
+        "musisz to zrobić",
+        "nie rób tego",
+        "wypadało by to zrobić",
+        "nie polecam tego robić"])
+    await m.edit(content=f"Magiczna kula mówi: {answer} :crystal_ball: ")
 
 
 @bot.command()
@@ -181,29 +181,29 @@ async def hack(ctx, member):
     await sleep(0.6)
     city = choice([
         "Bydgoszczy!",
-        "Wroc艂awiu",
+        "Wrocławiu",
         "Warszawie!",
-        "艁odzi!",
-        "艢l膮sku!"]
+        "Łodzi!",
+        "Śląsku!"]
     )
-    await m.edit(content=f"U偶ytkownik mieszka w {city}")
+    await m.edit(content=f"Użytkownik mieszka w {city}")
     await sleep(4)
-    await m.edit(content="Zamawianie 10 ton w臋gla za pobraniem...")
+    await m.edit(content="Zamawianie 10 ton węgla za pobraniem...")
     await sleep(4)
-    await m.edit(content="Zam贸wione! Sprawdzanie IP oraz hackowanie API Discord aby zdoby膰 dane personalne...")
+    await m.edit(content="Zamówione! Sprawdzanie IP oraz hackowanie API Discord aby zdobyć dane personalne...")
     await sleep(4)
-    await m.edit(content="Dane Wys艂ane w wiadomo艣ci prywatnej!")
+    await m.edit(content="Dane Wysłane w wiadomości prywatnej!")
     await sleep(4)
-    await m.edit(content="Doxowanie informacji na wykopie zosta艂o uko艅czone!")
+    await m.edit(content="Doxowanie informacji na wykopie zostało ukończone!")
     await sleep(4)
     await m.edit(content="Hacked :call_me:")
 
 
 @bot.event
 async def on_command_error(ctx, error):
-    await ctx.send("B艂膮d!")
-    await ctx.send(f"Tre艣膰 b艂臋du :wrench: \n```{error}```")
+    await ctx.send("Błąd!")
+    await ctx.send(f"Treść błędu :wrench: \n```{error}```")
     user = await bot.fetch_user(761868897241661490)
-    await user.send(f"Clams napotka艂 error!\n```{error}```")
+    await user.send(f"Clams napotkał error!\n```{error}```")
 
 bot.run(TOKEN)
