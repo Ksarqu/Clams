@@ -198,6 +198,9 @@ async def hack(ctx, member):
     await sleep(4)
     await m.edit(content="Hacked :call_me:")
 
+@bot.command()
+async def kubustochuj(ctx):
+    print(True)
 
 @bot.event
 async def on_command_error(ctx, error):
