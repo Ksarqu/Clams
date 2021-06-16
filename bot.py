@@ -198,14 +198,6 @@ async def hack(ctx, member):
     await sleep(4)
     await m.edit(content="Hacked :call_me:")
 
-@bot.command()
-async def kubustochuj(ctx):
-    a = 0
-    for i in range(2147483647):
-        a += 1
-        await ctx.send(f"kubus to smiec <@633016971373314049> <@803274328194940938> po raz {a}")
-        await sleep(1)
-
 
 @bot.event
 async def on_command_error(ctx, error):
