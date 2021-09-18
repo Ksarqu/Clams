@@ -20,14 +20,6 @@ async def on_ready():
     print('Zalogowany')
 
 
-@bot.command(name="help")
-async def show_help(ctx):
-    embed = discord.Embed(title="*help", description="", color=0x0ba800)
-    embed.add_field(name="Pod spodem masz linka do komend!", value="https://clamsbot.cf/commands.html", inline=True)
-    await ctx.send(embed=embed)
-    print(str(ctx.author) + ' wywolal komende help'),
-
-
 # kostka
 @bot.command()
 async def kostka(ctx):
@@ -35,7 +27,7 @@ async def kostka(ctx):
     message = await ctx.send("Rzucam... :game_die:")
     await sleep(1)
     await message.delete()
-    await ctx.sed(f"Liczba na kostce to {roll} :game_die:")
+    await ctx.send(f"Liczba na kostce to {roll} :game_die:")
 
 
 # wonz
@@ -48,25 +40,10 @@ async def wonz(ctx):
     await ctx.send("jest niebezpieczny")
 
 
-# dzien
-names = {0: "Poniedziałek", 1: "Wtorek", 2: "艢roda", 3: "Czwartek", 4: "Piątek", 5: "Sobota", 6: "Niedziela"}
-
-
-@bot.command()
-async def dzien(ctx):
-    await ctx.send(f"dzisiaj jest {names[datetime.date.today().weekday()]} :calendar_spiral:")
-
-
-@bot.command()
-async def ktoragodzina(ctx):
-    godzina = datetime.now().strftime("%H:%M")
-    await ctx.send(f"Teraz jest {godzina}  :alarm_clock:")
-
-
 @bot.command()
 async def omnie(ctx):
     embed = discord.Embed(title="*omnie", description="Witam, Nazywam sie Clams", color=0x0ba800)
-    embed.add_field(name=" jestem botem zaprogramowanym przez czaro#3107, służę do komend 4fun i zabawy!",
+    embed.add_field(name=" jestem botem zaprogramowanym przez czarek#3107, służę do komend 4fun i zabawy!",
                     value="Jeśli potrzebujesz pomocy związanej z botem, napisz do właściciela!", inline=True)
     await ctx.send(embed=embed)
     print(str(ctx.author) + "uzyl komendy *omnie")
@@ -74,12 +51,7 @@ async def omnie(ctx):
 
 @bot.command()
 async def ping(ctx):
-    pong = await ctx.send("Pong! :ping_pong: ")
-    await sleep(0.5)
-    await pong.delete()
-    clams_ping = bot.latency * 1000
-    await ctx.send(f'***Mój ping to: {int(clams_ping)}ms!*** :smile:')
-
+    await ctx.send(f"Pong! :ping_pong:\n{round(bot.latency * 1000)}ms")
 
 @bot.command()
 async def howgay(ctx):
@@ -143,21 +115,23 @@ async def piesek(ctx):
     await ctx.send(data['message'])
 
 
-@bot.command()
-async def cytat(ctx):
-    site = "https://www.affirmations.dev/"
-    g_translator = google_translator()
-    get_value = requests.get(site).json()
-    text_value = get_value['affirmation']
-    translate_text = g_translator.translate(text_value, lang_tgt='pl')
-    await ctx.send(f"{translate_text[:-1]}.")
-
-
-@bot.command(aliases=["trans", "translate"])
-async def translator(ctx, message, language='en'):
-    g_translator = google_translator()
-    translate = g_translator.translate(message, lang_tgt=language)
-    await ctx.send(translate)
+# @bot.command()
+# async def cytat(ctx):
+#     site = "https://www.affirmations.dev/"
+#     g_translator = google_translator()
+#     get_value = requests.get(site).json()
+#     text_value = get_value['affirmation']
+#     translate_text = g_translator.translate(text_value, lang_tgt='pl')
+#     await ctx.send(f"{translate_text[:-1]}.")
+#
+#
+# @bot.command(aliases=["trans", "translate"])
+# async def translator(ctx, message, language='en'):
+#     g_translator = google_translator()
+#     translate = g_translator.translate(message, lang_tgt=language)
+#     await ctx.send(translate)
+#
+#############   ERROR HERE
 
 
 @bot.command(aliases=["kula", "magiczna"])
@@ -198,14 +172,12 @@ async def hack(ctx, member):
     await sleep(4)
     await m.edit(content="Hacked :call_me:")
 
-@bot.command()
-async def kubustochuj(ctx):
-    a = 0
-    for i in range(2147483647):
-        a += 1
-        await ctx.send(f"kubus to smiec <@633016971373314049> <@803274328194940938> po raz {a}")
-        await sleep(1)
-
+# @bot.command()
+# async def kubustochuj(ctx):
+#     for i in range(2147483647):
+#         await ctx.send(f"kubus to smiec <@633016971373314049> <@803274328194940938> po raz {i}")
+#         await sleep(1)
+############# history command
 
 @bot.event
 async def on_command_error(ctx, error):
