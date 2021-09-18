@@ -10,10 +10,13 @@ from google_trans_new import google_translator
 bot = commands.Bot(command_prefix="*")
 bot.remove_command('help')
 
-with open("config.json") as configjsonFile:
-    configData = json.load(configjsonFile)
-    TOKEN = configData["TOKEN"]
 
+try:
+    with open("config.json") as configjsonFile:
+        configData = json.load(configjsonFile)
+        TOKEN = configData["TOKEN"]
+except:
+    print("add config.json file and put your token into that file")
 
 @bot.event
 async def on_ready():
